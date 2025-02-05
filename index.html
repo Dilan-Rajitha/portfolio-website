@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>D Rajitha - personal portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="navbar-container">
+        <div class="logo">
+          <a href="#">D Rajitha.</a>
+        </div>
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+          <a href="https://drive.google.com/file/d/1E6LgnislSuooDU4ckt3ztWq_l2uLX7bj/view?usp=drive_link" target="_blank">Download CV</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="menu-btn">
+      <div class="menu-btn__burger"></div>
+    </div>
+
+    <!-- Home Section -->
+    <section class="home" id="home">
+      <div class="social-links">
+        <a href="https://github.com/Dilan-Rajitha" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/dilan-rajitha-6bb24321a/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-dribbble"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      
+      <div class="home-content">
+        <div class="profile-image">
+          <img src="dilan.jpg" alt="Dilan Rajitha">
+        </div>
+        <div class="text-content">
+          <div class="name-wrapper">
+            <h1>Dilan Rajitha</h1>
+            <span class="verified"><i class="fas fa-check"></i></span>
+          </div>
+          <h2>Full Stack Developer</h2>
+          <p>Crafting code, creating impact.</p>
+        </div>
+      </div>
+
+      <div class="scroll-down">
+        <a href="#about">
+          <div class="mouse">
+            <span></span>
+          </div>
+          <div class="arrow-down">
+            <span></span>
+            <span></span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+
+
+
+
+
+
+    <section class="about" id="about">
+      <h2 class="section-title">About</h2>
+      <p class="subtitle">My Personal Journey</p>
+  
+      <div class="timeline-container">
+          <div class="timeline-header">
+              <div class="timeline-type education" data-filter="education">
+                  <i class="fas fa-graduation-cap"></i>
+                  <span>Education</span>
+              </div>
+              <div class="timeline-type experience" data-filter="experience">
+                  <i class="fas fa-briefcase"></i>
+                  <span>Experience</span>
+              </div>
+          </div>
+  
+          <div class="timeline">
+              <!-- Education Timeline -->
+              <div class="timeline-item left" data-type="education">
+                  <div class="content">
+                      <h3>BSc (Hons) Software Engineering</h3>
+                      <p class="institution">Cardiff Metropolitan University UK</p>
+                      <p class="period">Undergraduate (2024-2025)</p>
+                  </div>
+              </div>
+  
+              <div class="timeline-item right" data-type="education">
+                  <div class="content">
+                      <h3>HD in Computing & Software Engineering</h3>
+                      <p class="institution">Cardiff Metropolitan University UK</p>
+                      <p class="period">Grade - Merit Pass (2024)</p>
+                  </div>
+              </div>
+  
+              <div class="timeline-item left" data-type="education">
+                  <div class="content">
+                      <h3>BSc (Hons) Software Engineering</h3>
+                      <p class="institution">Open University Sri Lanka</p>
+                      <p class="period">Undergraduate (2021)</p>
+                  </div>
+              </div>
+  
+              <!-- Experience Timeline -->
+              <div class="timeline-item right" data-type="experience">
+                  <div class="content">
+                      <h3>Software Engineer Intern</h3>
+                      <p class="institution"></p>
+                      <p class="period">2024 - present</p>
+                      
+                  </div>
+              </div>
+  
+              <div class="timeline-item left" data-type="experience">
+                  <div class="content">
+                      <h3>Freelance Web Developer</h3>
+                      <p class="institution">Self-Employed</p>
+                      <p class="period">2023 - Present</p>
+                      
+                  </div>
+              </div>
+  
+              
+          </div>
+      </div>
+  </section>
+  
+
+
+    <section id="projects" class="projects-section">
+        <h2>Projects</h2>
+        <p class="subtitle">My Personal and Group projects</p>
+        <div class="filter-buttons">
+          
+          
+        </div>
+      
+        <div class="projects-container" id="projects-container">
+          <!-- Projects will load here dynamically from Firebase -->
+        </div>
+      </section>
+      
+      <!-- Popup Modal for Project Details -->
+      <div id="project-popup" class="popup">
+        <div class="popup-content">
+          <span class="popup-close-btn">&times;</span>
+          <h3 class="popup-title"></h3>
+          <p class="popup-description"></p>
+        </div>
+      </div>
+
+
+      <section class="contact-section" id="contact">
+        <h1 class="section-title">Get in touch</h1>
+        <p class="subtitle">Contact Me</p>
+    
+        <div class="contact-container">
+            <!-- Left side with contact cards -->
+            <div class="contact-left">
+                <div class="contact-card">
+                    <i class="bi bi-envelope"></i>
+                    <h3>Email</h3>
+                    <p>sdgdrp.asia@gmail.com</p>
+                    <a class="contact-link" href="mailto:sdgdrp.asia@gmail.com">Write me →</a>
+                </div>
+    
+                <div class="contact-card">
+                    <i class="bi bi-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <p>+94 77 508 1086</p>
+                    <a class="contact-link" href="https://wa.me/94775081086">Write me →</a>
+                </div>
+    
+                <div class="contact-card">
+                    <i class="bi bi-discord"></i>
+                    <h3>Discord</h3>
+                    <p>dilan_rajitha_37404</p>
+                    <a href="#">Write me →</a>
+                </div>
+            </div>
+    
+            <!-- Right side with contact form -->
+            <div class="contact-right">
+                <form id="contactForm">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Your Name" required>
+            
+                    <label for="emailid">Email</label>
+                    <input type="email" id="emailid" placeholder="Your Email" required>
+            
+                    <label for="msgContent">Description</label>
+                    <textarea id="msgContent" placeholder="Message" required></textarea>
+            
+                    <button type="submit">Send Message ►</button>
+                </form>
+            </div>
+            
+    
+           
+    </section>
+
+    
+
+    <!-- HTML -->
+    <footer class="site-footer">
+        <div class="footer-wrapper">
+            
+            <h2 class="footer-title">Dilan Rajitha</h2>
+            <p class="footer-text">
+                I am a web designer and developer who brings ideas to life with code and creativity. Whether it’s a stunning website or a seamless user experience, I focus on delivering exceptional digital products. Let's collaborate and create something amazing.
+            </p>
+            <a href="https://drive.google.com/file/d/1E6LgnislSuooDU4ckt3ztWq_l2uLX7bj/view?usp=drive_link" target="_blank" class="footer-contact-btn">
+                Download CV
+                <span class="contact-arrow">→</span>
+            </a>
+            <div class="footer-social-links">
+                <a href="https://github.com/Dilan-Rajitha" class="social-link-item">github</a>
+                <a href="https://www.linkedin.com/in/dilan-rajitha-6bb24321a/" class="social-link-item">linkedin</a>
+                <a href="mailto:sdgdrp.asia@gmail.com" class="social-link-item">email</a>
+            </div>
+        </div>
+    </footer>
+
+    
+    
+
+
+      
+
+
+  
+
+  
+    <script src="script.js"></script>
+    
+    <script type="module" src="firebase.js"></script>
+
+
+  </body>
+
+  
+</html>
