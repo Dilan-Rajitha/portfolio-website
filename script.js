@@ -74,44 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Contact form handling
-    const contactForm = document.querySelector('.contact-right form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = this.querySelector('input[type="text"]').value;
-            const email = this.querySelector('input[type="email"]').value;
-            const message = this.querySelector('textarea').value;
-            
-            // Basic validation
-            if (!name || !email || !message) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address');
-                return;
-            }
-            
-            // Here you would typically send the data to your server
-            console.log({
-                name,
-                email,
-                message
-            });
-            
-            // Clear form
-            this.reset();
-            
-            // Show success message
-            alert('Message sent successfully!');
-        });
-    }
+
+
 
     // Form field focus effects
     const formFields = document.querySelectorAll('.contact-right input, .contact-right textarea');

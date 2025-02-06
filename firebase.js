@@ -18,84 +18,99 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const db = getFirestore(app);
 
-// --------------- Contact Form Submission (Realtime Database) --------------- //
-const contactFormDB = ref(database, "contactForm");
+// Contact Form Handling (Web3Forms & Firebase)
+const contactForm = document.querySelector("form");
+if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-document.getElementById("contactForm").addEventListener("submit", submitForm);
+        const formData = new FormData(this);
+        const name = formData.get("name");
+        const email = formData.get("email");
+        const message = formData.get("message");
 
-function submitForm(e) {
-  e.preventDefault();
+        if (!name || !email || !message) {
+            alert("Please fill in all fields");
+            return;
+        }
 
-  var name = getElementVal("name");
-  var emailid = getElementVal("emailid");
-  var msgContent = getElementVal("msgContent");
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address");
+            return;
+        }
 
-  saveMessages(name, emailid, msgContent);
+        // Save to Firebase
+        const contactFormDB = ref(database, "contactForm");
+        const newContactRef = push(contactFormDB);
+        set(newContactRef, { name, email, message })
+            .then(() => console.log("Contact form submitted successfully!"))
+            .catch((error) => console.error("Error saving data:", error));
+
+        // Submit to Web3Forms
+        fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Message sent successfully!");
+                    contactForm.reset();
+                } else {
+                    alert("Error sending message. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again later.");
+            });
+    });
 }
 
-// Function to get form input values
-const getElementVal = (id) => document.getElementById(id).value;
-
-// Function to save messages to Firebase Realtime Database
-const saveMessages = (name, emailid, msgContent) => {
-  const newContactRef = push(contactFormDB);
-  set(newContactRef, {
-    name: name,
-    email: emailid,
-    message: msgContent,
-  })
-    .then(() => console.log("Contact form submitted successfully!"))
-    .catch((error) => console.error("Error saving data:", error));
-};
-
-// --------------- Load and Display Projects (Firestore) --------------- //
+// Load and Display Projects (Firestore)
 async function loadProjects() {
-  const projectsContainer = document.getElementById("projects-container");
-  const querySnapshot = await getDocs(collection(db, "projects"));
-
-  projectsContainer.innerHTML = "";
-  querySnapshot.forEach((doc) => {
-    const project = doc.data();
-    const projectCard = `
-      <div class="project-card">
-        <img src="${project.image}" alt="${project.title}" />
-        <div class="project-info">
-          <h3>${project.title}</h3>
-          <button class="see-more-btn" data-id="${doc.id}">See More</button>
-        </div>
-      </div>
-    `;
-    projectsContainer.innerHTML += projectCard;
-  });
-
-  // Handle "See More" button click
-  document.querySelectorAll('.see-more-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const projectId = e.target.getAttribute('data-id');
-      openProjectPopup(projectId);
+    const projectsContainer = document.getElementById("projects-container");
+    const querySnapshot = await getDocs(collection(db, "projects"));
+    projectsContainer.innerHTML = "";
+    querySnapshot.forEach((doc) => {
+        const project = doc.data();
+        const projectCard = `
+            <div class="project-card">
+                <img src="${project.image}" alt="${project.title}" />
+                <div class="project-info">
+                    <h3>${project.title}</h3>
+                    <button class="see-more-btn" data-id="${doc.id}">See More</button>
+                </div>
+            </div>
+        `;
+        projectsContainer.innerHTML += projectCard;
     });
-  });
+
+    document.querySelectorAll(".see-more-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const projectId = e.target.getAttribute("data-id");
+            openProjectPopup(projectId);
+        });
+    });
 }
 
 async function openProjectPopup(projectId) {
-  const docRef = doc(db, "projects", projectId);
-  const docSnap = await getDoc(docRef);
-  
-  if (docSnap.exists()) {
-    const project = docSnap.data();
-    const popup = document.getElementById('project-popup');
-    popup.querySelector('.popup-title').textContent = project.title;
-    popup.querySelector('.popup-description').textContent = project.description;
-    popup.style.display = 'flex';
-  } else {
-    console.log("No such document!");
-  }
+    const docRef = doc(db, "projects", projectId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        const project = docSnap.data();
+        const popup = document.getElementById("project-popup");
+        popup.querySelector(".popup-title").textContent = project.title;
+        popup.querySelector(".popup-description").textContent = project.description;
+        popup.style.display = "flex";
+    } else {
+        console.log("No such document!");
+    }
 }
 
-// Close Popup
-document.querySelector('.popup-close-btn').addEventListener('click', () => {
-  document.getElementById('project-popup').style.display = 'none';
+document.querySelector(".popup-close-btn").addEventListener("click", () => {
+    document.getElementById("project-popup").style.display = "none";
 });
 
-// Load Projects on Window Load
 window.onload = loadProjects;
